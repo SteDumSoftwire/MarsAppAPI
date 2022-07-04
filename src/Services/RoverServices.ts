@@ -1,5 +1,6 @@
 import {fetch_photos} from "./NasaFetchService";
 import {trim_photos_json} from "./helper";
+import {Photo} from "../Models/RoverModels"
 
 export const mergeRequests = async (rover: string, camera: string, sol: number,
                           paginationStart: number, paginationEnd: number) => {

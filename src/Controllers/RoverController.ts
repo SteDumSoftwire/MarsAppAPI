@@ -23,11 +23,17 @@ export const getRovers = (req, res) => {
 
 export const getPhotos = async (req, res) => {
     try {
-        if (!(req.params.rover in VALID_ROVERS) || !(req.params.cameras in CAMERAS)) {
+        if (!(req.params.rover in VALID_ROVERS)) {
             throw new Error('Incorrect rover name');
         }
-        res.send(JSON.stringify(mergeRequests(req.params.rover, req.params.camera, req.query.sol,
-            req.query.paginationStart, req.query.paginationEnd)));
+        if (!(req.params.camera.toUpperCase() in CAMERAS)) {
+            throw new Error('Incorrect camera name');
+        }
+        if (req.query.paginationStart == null || req.query.paginationEnd == null) {
+            throw new Error('Send paginationStart and paginationEnd params');
+        }
+        mergeRequests(req.params.rover, req.params.camera, req.query.sol,
+            req.query.paginationStart, req.query.paginationEnd).then((photos) => res.send(photos));
     } catch(err) {
         res.send(err.message);
     }

@@ -6,9 +6,6 @@ const API_URL = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
 export async function fetch_photos(rover: string, camera: string, sol: number = 1000, paginationStart: number, paginationEnd: number) {
     let requestArray = []
     let data = []
-    if (paginationStart == null || paginationEnd == null) {
-        throw new Error('Send paginationStart and paginationEnd params ')
-    }
     for (let page = paginationStart; page <= paginationEnd; page++) {
         requestArray.push(axios.get(
             API_URL + rover + '/photos',

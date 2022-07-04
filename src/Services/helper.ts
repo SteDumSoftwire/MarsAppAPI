@@ -1,4 +1,5 @@
 import {CAMERAS} from "../Controllers/RoverController";
+import {Photo} from "../Models/RoverModels";
 
 export function trim_photos_json(data: any): Array<Photo> {
     let photos: Array<Photo> = []

@@ -1,4 +1,4 @@
-interface Photo {
+export interface Photo {
     id: number;
     img_src: string;
     rover: string;
