@@ -19,6 +19,7 @@
   "homepage": "https://github.com/SteDumSoftwire/MarsAppAPI#readme",
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/whatwg-fetch": "^0.0.33",
     "typescript": "^3.9.5"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "nodemon": "^2.0.18",
+    "request": "^2.88.2",
     "ts-node": "^10.8.1"
   }
 }
