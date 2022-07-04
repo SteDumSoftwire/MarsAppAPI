@@ -1,4 +1,4 @@
-import {getPhotos, getRovers} from "../Controllers/APIControllerService";
+import {getPhotos, getRovers} from "../Controllers/RoverController";
 
 const express = require('express')
 

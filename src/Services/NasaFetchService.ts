@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const api_key = 'AE6PQe4KnsgG31lrRRxR95iGh8X6ZTyLjHturFwr'
+const API_KEY = 'AE6PQe4KnsgG31lrRRxR95iGh8X6ZTyLjHturFwr'
+const API_URL = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
 
-export async function fetch_photos(rover: string, camera: string, sol: number, paginationStart: number, paginationEnd: number) {
-    sol = sol == null ? 1000: sol
+export async function fetch_photos(rover: string, camera: string, sol: number = 1000, paginationStart: number, paginationEnd: number) {
     let requestArray = []
     let data = []
     if (paginationStart == null || paginationEnd == null) {
@@ -11,10 +11,10 @@ export async function fetch_photos(rover: string, camera: string, sol: number, p
     }
     for (let page = paginationStart; page <= paginationEnd; page++) {
         requestArray.push(axios.get(
-            'https://api.nasa.gov/mars-photos/api/v1/rovers/' + rover + '/photos',
+            API_URL + rover + '/photos',
             {
                 params: {
-                    api_key: api_key,
+                    api_key: API_KEY,
                     camera: camera,
                     sol: sol,
                     page: page
@@ -30,6 +30,9 @@ export async function fetch_photos(rover: string, camera: string, sol: number, p
 }
 
 export async function fetch_rovers() {
-    return axios.get('https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=' + api_key)
-        .then(res => res.data)
+    return axios.get(API_URL, {
+        params: {
+            api_key: API_KEY
+        }
+    }).then(res => res.data)
 }
