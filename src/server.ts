@@ -19,6 +19,8 @@ const cameras = {
     "PANCAM": "Panoramic Camera",
     "MINITES": "Miniature Thermal Emission Spectrometer (Mini-TES)"
 }
+
+const rovers = ["curiosity", "spirit", "opportunity", "perseverance"]
 const api_key = 'AE6PQe4KnsgG31lrRRxR95iGh8X6ZTyLjHturFwr'
 
 const express = require('express')
@@ -40,6 +42,9 @@ router.get('/rovers', (req, res) => {
 router.get('/rovers/:rover/camera/:camera', async (req, res) => {
     let photos: Array<Photo> = []
     try {
+        if (!rovers.includes(req.params.rover)) {
+             throw new Error('Incorrect rover name');
+        }
         let pages = await fetch_photos(req.params.rover, req.params.camera, req.query.sol, req.query.paginationStart,
             req.query.paginationEnd)
         for (let page of pages) {
